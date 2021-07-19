@@ -13,11 +13,11 @@
 
     <main>
         <form>
-            <input placeholder="Add a task here.." type="text" name="new-task" />
+            <input placeholder="Add a task here.." type="text" name="new" />
             <input type="submit" value="+">
         </form>
 
-        <ul>
+        <ul id='tasksList'>
             <li>
                 <label>task name</label>
                 <div class="btns">
@@ -26,8 +26,10 @@
                 </div>
             </li>
         </ul>
+
         <hr />
-        <ul>
+
+        <ul id='doneList'>
             <li class="done">
                 <label>done task</label>
                 <div class="btns">
@@ -36,6 +38,8 @@
             </li>
         </ul>
     </main>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
