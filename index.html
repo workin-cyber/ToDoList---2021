@@ -5,29 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDoList</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>ToDo List</h1>
+    <h1>To-Do List</h1>
 
     <main>
         <form>
-            <input placeholder="new task" type="text" name="new-task" />
-            <input type="submit" value="ADD">
+            <input placeholder="Add a task here.." type="text" name="new-task" />
+            <input type="submit" value="+">
         </form>
 
         <ul>
             <li>
                 <label>task name</label>
-                <input type="checkbox" />
-                <button>X</button>
+                <div class="btns">
+                    <input type="checkbox" class="btn" />
+                    <button class="btn">X</button>
+                </div>
             </li>
         </ul>
         <hr />
         <ul>
-            <li>
+            <li class="done">
                 <label>done task</label>
-                <input type="checkbox" checked />
+                <div class="btns">
+                    <input type="checkbox" checked class="btn" />
+                </div>
             </li>
         </ul>
     </main>
