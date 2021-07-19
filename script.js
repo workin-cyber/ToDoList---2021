@@ -2,17 +2,17 @@ let counter = 4
 const list = [
     {
         id: 1,
-        text: 'asfasdf',
+        text: 'aaa',
         done: false
     },
     {
         id: 2,
-        text: 'asfasdf',
+        text: 'bbb',
         done: false
     },
     {
         id: 3,
-        text: 'asfasdf',
+        text: 'ccc',
         done: true
     }
 ]
@@ -31,7 +31,10 @@ function renderLists() {
                                         onchange="updateTask(${task.id})"
                                         class="btn" 
                                     />
-                                  ${task.done ? '' : `<button onclick="deleteTask(${task.id})" class="btn">X</button>`}
+                                  ${task.done ? '' : `<button 
+                                     onclick="deleteTask(${task.id})" 
+                                     class="btn"
+                                  >X</button>`}
                               </div>
                           </li>`
     })

@@ -12,30 +12,19 @@
     <h1>To-Do List</h1>
 
     <main>
-        <form>
-            <input placeholder="Add a task here.." type="text" name="new" />
+        <form autocomplete="off">
+            <input required placeholder="Add a task here.." type="text" name="new" />
             <input type="submit" value="+">
         </form>
 
         <ul id='tasksList'>
-            <li>
-                <label>task name</label>
-                <div class="btns">
-                    <input type="checkbox" class="btn" />
-                    <button class="btn">X</button>
-                </div>
-            </li>
+
         </ul>
 
         <hr />
 
         <ul id='doneList'>
-            <li class="done">
-                <label>done task</label>
-                <div class="btns">
-                    <input type="checkbox" checked class="btn" />
-                </div>
-            </li>
+
         </ul>
     </main>
 
