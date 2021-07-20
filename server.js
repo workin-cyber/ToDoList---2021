@@ -52,9 +52,9 @@ app.put('/task', function (req, res) {
 })
 
 app.delete('/task', function (req, res) {
-    const index = list.findIndex(task => task.id == id)
+    const index = list.findIndex(task => task.id == req.query.id)
     list.splice(index, 1)
-    res.send('sccess')
+    res.send('success')
 })
 
 app.listen(3000, () => console.log('server is runnig'))

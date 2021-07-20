@@ -17,7 +17,7 @@ let counter = 4
     }
 ] */
 
-function renderLists() {
+function renderLists(id) {
     document.querySelector('#tasksList').innerHTML = ''
     document.querySelector('#doneList').innerHTML = ''
     axios.get('http://localhost:3000/task')
@@ -40,7 +40,6 @@ function renderLists() {
                               </div>
                           </li>`
             })
-
         })
 }
 renderLists()
