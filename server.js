@@ -1,11 +1,12 @@
 const uniqid = require('uniqid')
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
 const list = [
     {
         id: 1,
-        text: 'aaa',
+        text: 'aaa from server',
         done: false
     },
     {
@@ -20,6 +21,7 @@ const list = [
     }
 ]
 
+app.use(cors())
 app.use(express.json())
 
 app.get('/task', function (req, res) {
@@ -29,7 +31,7 @@ app.get('/task', function (req, res) {
         res.send(list)
 })
 
-app.post('task', function (req, res) {
+app.post('/task', function (req, res) {
     if (req.body.text) {
         const task = {
             id: uniqid(),
@@ -37,19 +39,19 @@ app.post('task', function (req, res) {
             done: false
         }
         list.push(task)
-        res.send('sccess')
+        res.send(task)
     }
     else
-        res.send(`Error: field 'text' is required`)
+        res.status('400').send(`Error: field 'text' is required`)
 })
 
-app.put('task', function (req, res) {
+app.put('/task', function (req, res) {
     const index = list.findIndex(item => item.id == req.body.id)
     list[index].done = !list[index].done
-    res.send('sccess')
+    res.send(list[index])
 })
 
-app.delete('task', function (req, res) {
+app.delete('/task', function (req, res) {
     const index = list.findIndex(task => task.id == id)
     list.splice(index, 1)
     res.send('sccess')

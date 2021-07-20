@@ -1,5 +1,5 @@
 let counter = 4
-const list = [
+/* const list = [
     {
         id: 1,
         text: 'aaa',
@@ -15,15 +15,17 @@ const list = [
         text: 'ccc',
         done: true
     }
-]
+] */
 
 function renderLists() {
     document.querySelector('#tasksList').innerHTML = ''
     document.querySelector('#doneList').innerHTML = ''
-
-    list.forEach(task => {
-        document.querySelector(task.done ? '#doneList' : '#tasksList')
-            .innerHTML += `<li class="${task.done ? 'done' : ''}">
+    axios.get('http://localhost:3000/task')
+        .then(res => {
+            const list = res.data
+            list.forEach(task => {
+                document.querySelector(task.done ? '#doneList' : '#tasksList')
+                    .innerHTML += `<li class="${task.done ? 'done' : ''}">
                               <label>${task.text}</label>
                               <div class="btns">
                                   <input 
@@ -37,7 +39,9 @@ function renderLists() {
                                   >X</button>`}
                               </div>
                           </li>`
-    })
+            })
+
+        })
 }
 renderLists()
 
