@@ -1,6 +1,6 @@
 const uniqid = require('uniqid')
 const express = require('express')
-const cors = require('cors')
+//const cors = require('cors')
 const app = express()
 
 const list = [
@@ -21,7 +21,9 @@ const list = [
     }
 ]
 
-app.use(cors())
+app.use(express.static('client'))
+
+//app.use(cors())
 app.use(express.json())
 
 app.get('/task', function (req, res) {
@@ -32,7 +34,9 @@ app.get('/task', function (req, res) {
 })
 
 app.post('/task', function (req, res) {
-    if (req.body.text) {
+    try {
+        if (!req.body.text)
+            throw { message: `Error: field 'text' is required` }
         const task = {
             id: uniqid(),
             text: req.body.text,
@@ -40,9 +44,9 @@ app.post('/task', function (req, res) {
         }
         list.push(task)
         res.send(task)
+    } catch (error) {
+        res.status('400').send(error)
     }
-    else
-        res.status('400').send(`Error: field 'text' is required`)
 })
 
 app.put('/task', function (req, res) {

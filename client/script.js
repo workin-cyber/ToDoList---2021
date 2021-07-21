@@ -1,12 +1,12 @@
-function renderLists() {
+const renderLists = async () => {
     document.querySelector('#tasksList').innerHTML = ''
     document.querySelector('#doneList').innerHTML = ''
-    axios.get('http://localhost:3000/task')
-        .then(res => {
-            const list = res.data
-            list.forEach(task => {
-                document.querySelector(task.done ? '#doneList' : '#tasksList')
-                    .innerHTML += `<li class="${task.done ? 'done' : ''}">
+    try {
+        const res = await axios.get('/task')
+        const list = res.data
+        list.forEach(task => {
+            document.querySelector(task.done ? '#doneList' : '#tasksList')
+                .innerHTML += `<li class="${task.done ? 'done' : ''}">
                               <label>${task.text}</label>
                               <div class="btns">
                                   <input 
@@ -20,8 +20,10 @@ function renderLists() {
                                   >X</button>`}
                               </div>
                           </li>`
-            })
         })
+    } catch (error) {
+        console.log(error)
+    }
 }
 renderLists()
 
@@ -34,7 +36,7 @@ function addNewTask(event) {
             [input.name]: input.type == 'checkbox' ? input.checked : input.value
         }), {})
 
-    axios.post('http://localhost:3000/task', { text: values.new })
+    axios.post('/task', { text: values.new })
         .then(() => {
             document.querySelector('form').reset()
             renderLists()
@@ -42,15 +44,22 @@ function addNewTask(event) {
 }
 
 function updateTask(id) {
-    axios.put('http://localhost:3000/task', { id })
+    axios.put('/task', { id })
         .then(() => {
             renderLists()
         })
 }
 
-function deleteTask(id) {
-    axios.delete(`http://localhost:3000/task?id=${id}`)
-        .then(() => {
+/* function deleteTask(id) {
+    axios.delete(`/task?id=${id}`)
+        .then((res) => {
             renderLists()
         })
+} */
+
+async function deleteTask(id) {
+    const res = await axios.delete(`/task?id=${id}`)
+    await renderLists()
+    console.log('done')
 }
+
