@@ -1,23 +1,4 @@
-let counter = 4
-/* const list = [
-    {
-        id: 1,
-        text: 'aaa',
-        done: false
-    },
-    {
-        id: 2,
-        text: 'bbb',
-        done: false
-    },
-    {
-        id: 3,
-        text: 'ccc',
-        done: true
-    }
-] */
-
-function renderLists(id) {
+function renderLists() {
     document.querySelector('#tasksList').innerHTML = ''
     document.querySelector('#doneList').innerHTML = ''
     axios.get('http://localhost:3000/task')
@@ -51,26 +32,25 @@ function addNewTask(event) {
         .reduce((acc, input) => !input.name ? acc : ({
             ...acc,
             [input.name]: input.type == 'checkbox' ? input.checked : input.value
-        }), {}
-        )
-    list.push({
-        id: counter,
-        text: values.new,
-        done: false
-    })
-    counter++
-    document.querySelector('form').reset()
-    renderLists()
+        }), {})
+
+    axios.post('http://localhost:3000/task', { text: values.new })
+        .then(() => {
+            document.querySelector('form').reset()
+            renderLists()
+        })
 }
 
 function updateTask(id) {
-    const index = list.findIndex(task => task.id == id)
-    list[index].done = !list[index].done
-    renderLists()
+    axios.put('http://localhost:3000/task', { id })
+        .then(() => {
+            renderLists()
+        })
 }
 
 function deleteTask(id) {
-    const index = list.findIndex(task => task.id == id)
-    list.splice(index, 1)
-    renderLists()
+    axios.delete(`http://localhost:3000/task?id=${id}`)
+        .then(() => {
+            renderLists()
+        })
 }
