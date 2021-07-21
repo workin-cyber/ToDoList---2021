@@ -1,7 +1,13 @@
+require('dotenv').config()
 const uniqid = require('uniqid')
 const express = require('express')
 //const cors = require('cors')
 const app = express()
+
+/* console.log(__filename)
+console.log(__dirname) */
+console.log(process.env.username1)
+console.log(process.env)
 
 const list = [
     {
